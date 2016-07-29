@@ -18,25 +18,22 @@
  */
 package com.asquera.elasticsearch.plugins.http.auth.integration;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.Base64;
 import org.elasticsearch.rest.RestStatus;
-import org.elasticsearch.test.ElasticsearchIntegrationTest.ClusterScope;
-import org.elasticsearch.test.rest.client.http.HttpRequestBuilder;
+import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.rest.client.http.HttpResponse;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import static org.elasticsearch.test.ElasticsearchIntegrationTest.Scope;
 import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Test a rest action that sets special response headers
  */
-@ClusterScope(transportClientRatio = 0.0, scope = Scope.SUITE, numDataNodes = 1)
+@ESIntegTestCase.ClusterScope(transportClientRatio = 0.0, scope = ESIntegTestCase.Scope.SUITE, numDataNodes = 1)
 public class IpAuthenticationIntegrationTest extends HttpBasicServerPluginIntegrationTest {
 
     protected final String whitelistedIp = "2.2.2.2";

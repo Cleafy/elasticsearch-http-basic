@@ -20,8 +20,7 @@ package com.asquera.elasticsearch.plugins.http.auth.integration;
 
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.rest.RestStatus;
-import org.elasticsearch.test.ElasticsearchIntegrationTest.ClusterScope;
-import org.elasticsearch.test.ElasticsearchIntegrationTest.Scope;
+import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.rest.client.http.HttpResponse;
 import org.junit.Test;
 
@@ -30,7 +29,7 @@ import static org.hamcrest.Matchers.equalTo;
 /**
  * Test a rest action that sets special response headers
  */
-@ClusterScope(scope = Scope.SUITE, numDataNodes = 1)
+@ESIntegTestCase.ClusterScope(scope = ESIntegTestCase.Scope.SUITE, numDataNodes = 1)
 public class DefaultConfigurationIntegrationTest extends HttpBasicServerPluginIntegrationTest {
 
     @Override

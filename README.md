@@ -21,7 +21,8 @@ There is no way to configure this on a per index basis.
 
 |     Http Basic Plugin       | elasticsearch                |
 |-----------------------------|------------------------------|
-| v1.5.1(master)              | 1.5.1, 1.5.2, 1.6.0, 1.7.0   |
+| v2.3.4 (master)			  | 2.3.4
+| v1.5.1		              | 1.5.1, 1.5.2, 1.6.0, 1.7.0   |
 | v1.5.0                      | 1.5.0                        |
 | v1.4.0                      | 1.4.0                        |
 | v1.3.0                      | 1.3.0                        |
