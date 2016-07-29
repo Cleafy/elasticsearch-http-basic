@@ -1,5 +1,4 @@
 *.class
-*.jar
 *.zip
 /build/
 /bin/

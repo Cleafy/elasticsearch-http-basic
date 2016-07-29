@@ -10,7 +10,7 @@ def pluginName = 'elasticsearch-http-basic'
 def elasticVersion = '2.3.4'
 
 jar {
-  jar.baseName = "elasticsearch-http-basic" + version
+  jar.baseName = "elasticsearch-http-basic"
   manifest {
   	attributes 'Implementation-Title': 'elasticsearch-http-basic',
   	           'Implementation-Version': version
@@ -74,7 +74,7 @@ uploadArchives {
 
 task makePluginDescriptor(type: Copy) {
     from 'src/main/templates'
-    into 'build/tmp/plugin'
+    into 'src/main/resources'
     expand([
             'descriptor': [
                     'name': pluginName,
