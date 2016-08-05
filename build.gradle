@@ -4,11 +4,11 @@ apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version = '2.3.4'
+version = '2.3.5'
 def pluginDescription = 'Plugin to enable HTTP basic authentication and/or Ip based authentication'
 def pluginClassname = 'com.asquera.elasticsearch.plugins.http.HttpBasicServerPlugin'
 def pluginName = 'elasticsearch-http-basic'
-def elasticVersion = '2.3.4'
+def elasticVersion = '2.3.5'
 
 jar {
   jar.baseName = "elasticsearch-http-basic"
@@ -40,20 +40,7 @@ repositories {
 dependencies {
     
     // elastic search
-	compile("org.elasticsearch:elasticsearch:2.3.4")
-	compile("org.apache.lucene:lucene-core:5.5.0")
-	compile("org.apache.lucene:lucene-analyzers-common:5.5.0")
-	compile("org.apache.lucene:lucene-queries:5.5.0")
-	compile("org.apache.lucene:lucene-memory:5.5.0")
-	compile("org.apache.lucene:lucene-highlighter:5.5.0")
-	compile("org.apache.lucene:lucene-queryparser:5.5.0")
-	compile("org.apache.lucene:lucene-sandbox:5.5.0")
-	compile("org.apache.lucene:lucene-suggest:5.5.0")
-	compile("org.apache.lucene:lucene-misc:5.5.0")
-	compile("org.apache.lucene:lucene-join:5.5.0")
-	compile("org.apache.lucene:lucene-grouping:5.5.0")
-	compile("org.apache.lucene:lucene-spatial:5.5.0")
-	compile("org.apache.lucene:lucene-expressions:5.5.0")
+	compile("org.elasticsearch:elasticsearch:2.3.5")
 	
 	// httpclient
 	compile("org.apache.httpcomponents:httpclient:4.5.2")
@@ -63,7 +50,7 @@ dependencies {
 	
 	//test
 	testCompile group: 'junit', name: 'junit', version: '4.+'
-	testCompile(group: 'org.elasticsearch', name: 'elasticsearch', version: '2.3.4', classifier: 'tests')
+	testCompile(group: 'org.elasticsearch', name: 'elasticsearch', version: '2.3.5', classifier: 'tests')
 	testCompile(group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3')
 	testCompile(group: 'org.apache.lucene', name: 'lucene-test-framework', version: '5.5.0')
     
