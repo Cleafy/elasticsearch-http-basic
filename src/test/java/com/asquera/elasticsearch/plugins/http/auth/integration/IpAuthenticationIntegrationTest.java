@@ -27,6 +27,7 @@ import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.rest.client.http.HttpResponse;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -34,6 +35,7 @@ import static org.hamcrest.Matchers.equalTo;
  * Test a rest action that sets special response headers
  */
 @ESIntegTestCase.ClusterScope(transportClientRatio = 0.0, scope = ESIntegTestCase.Scope.SUITE, numDataNodes = 1)
+@Ignore
 public class IpAuthenticationIntegrationTest extends HttpBasicServerPluginIntegrationTest {
 
     protected final String whitelistedIp = "2.2.2.2";

@@ -23,6 +23,7 @@ import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.rest.client.http.HttpResponse;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -30,6 +31,7 @@ import static org.hamcrest.Matchers.equalTo;
  * Test a rest action that sets special response headers
  */
 @ESIntegTestCase.ClusterScope(scope = ESIntegTestCase.Scope.SUITE, numDataNodes = 1)
+@Ignore
 public class DefaultConfigurationIntegrationTest extends HttpBasicServerPluginIntegrationTest {
 
     @Override

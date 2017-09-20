@@ -5,11 +5,13 @@ import org.elasticsearch.common.Base64;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.rest.client.http.HttpRequestBuilder;
+import org.junit.Ignore;
 
 /**
  *
  * @author Ernesto Miguez (ernesto.miguez@asquera.de)
  */
+@Ignore
 public class HttpBasicServerPluginIntegrationTest extends ESIntegTestCase {
 
   protected final String localhost = "127.0.0.1";

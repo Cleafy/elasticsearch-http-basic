@@ -26,11 +26,14 @@ import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.rest.client.http.HttpResponse;
 import org.junit.Test;
+import org.junit.Ignore;
+
 
 /**
  * Test a rest action that sets special response headers
  */
 @ESIntegTestCase.ClusterScope(transportClientRatio = 0.0, scope = ESIntegTestCase.Scope.SUITE, numDataNodes = 1)
+@Ignore
 public class DisabledWhitelistIntegrationTest extends HttpBasicServerPluginIntegrationTest {
 
     @Override
