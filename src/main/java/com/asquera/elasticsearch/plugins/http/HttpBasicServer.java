@@ -9,8 +9,8 @@ import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.logging.Loggers;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
-import org.elasticsearch.http.HttpChannel;
-import org.elasticsearch.http.HttpRequest;
+import org.elasticsearch.rest.RestChannel;
+import org.elasticsearch.rest.RestRequest;
 import org.elasticsearch.http.HttpServer;
 import org.elasticsearch.http.HttpServerTransport;
 import org.elasticsearch.node.service.NodeService;
@@ -18,6 +18,7 @@ import org.elasticsearch.rest.BytesRestResponse;
 import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestRequest;
 import org.elasticsearch.rest.RestRequest.Method;
+import org.elasticsearch.indices.breaker.CircuitBreakerService;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -52,8 +53,9 @@ public class HttpBasicServer extends HttpServer {
 
     @Inject public HttpBasicServer(Settings settings, Environment environment, HttpServerTransport transport,
             RestController restController,
-            NodeService nodeService) {
-        super(settings, environment, transport, restController, nodeService);
+            NodeService nodeService,
+            CircuitBreakerService circuitBrakerService) {
+        super(settings, environment, transport, restController, nodeService, circuitBrakerService);
 
         this.user = settings.get("http.basic.user", "admin");
         this.password = settings.get("http.basic.password", "admin_pw");
@@ -75,7 +77,7 @@ public class HttpBasicServer extends HttpServer {
     }
 
     @Override
-    public void internalDispatchRequest(final HttpRequest request, final HttpChannel channel) {
+    public void internalDispatchRequest(final RestRequest request, final RestChannel channel) {
         if (log) {
             logRequest(request);
         }
@@ -101,7 +103,7 @@ public class HttpBasicServer extends HttpServer {
 
     // @param an http Request
     // @returns True iff we check the root path and is a method allowed for healthCheck
-    private boolean healthCheck(final HttpRequest request) {
+    private boolean healthCheck(final RestRequest request) {
         return request.path().equals("/") && isHealthCheckMethod(request.method());
     }
 
@@ -111,7 +113,7 @@ public class HttpBasicServer extends HttpServer {
    * @param request
    * @return true if the request is authorized
    */
-    private boolean authorized(final HttpRequest request) {
+    private boolean authorized(final RestRequest request) {
       return allowOptionsForCORS(request) ||
         authBasic(request) || ipAuthorized(request);
     }
@@ -122,7 +124,7 @@ public class HttpBasicServer extends HttpServer {
    * @param request
    * @return true iff the client is authorized by ip
    */
-    private boolean ipAuthorized(final HttpRequest request) {
+    private boolean ipAuthorized(final RestRequest request) {
       boolean ipAuthorized = false;
       String xForwardedFor = request.header(xForwardHeader);
       Client client = new Client(getAddress(request),
@@ -142,7 +144,7 @@ public class HttpBasicServer extends HttpServer {
       return ipAuthorized;
     }
 
-    public String getDecoded(HttpRequest request) {
+    public String getDecoded(RestRequest request) {
         String authHeader = request.header("Authorization");
         if (authHeader == null)
             return "";
@@ -157,7 +159,7 @@ public class HttpBasicServer extends HttpServer {
         }
     }
 
-    private boolean authBasic(final HttpRequest request) {
+    private boolean authBasic(final RestRequest request) {
         String decoded = "";
         try {
             decoded = getDecoded(request);
@@ -181,7 +183,7 @@ public class HttpBasicServer extends HttpServer {
    * @param request
    * @return the IP adress of the direct client
    */
-    private InetAddress getAddress(HttpRequest request) {
+    private InetAddress getAddress(RestRequest request) {
         return ((InetSocketAddress) request.getRemoteAddress()).getAddress();
     }
 
@@ -191,7 +193,7 @@ public class HttpBasicServer extends HttpServer {
      * specification mandates that browsers “preflight” the request, soliciting
      * supported methods from the server with an HTTP OPTIONS request
      */
-    private boolean allowOptionsForCORS(HttpRequest request) {
+    private boolean allowOptionsForCORS(RestRequest request) {
         // in elasticsearch.yml set
         // http.cors.allow-headers: "X-Requested-With, Content-Type, Content-Length, Authorization"
         if (request.method() == Method.OPTIONS) {
@@ -202,7 +204,7 @@ public class HttpBasicServer extends HttpServer {
         return false;
     }
 
-    public void logRequest(final HttpRequest request) {
+    public void logRequest(final RestRequest request) {
       String addr = getAddress(request).getHostAddress();
       String t = "Authorization:{}, type: {}, Host:{}, Path:{}, {}:{}, Request-IP:{}, " +
         "Client-IP:{}, X-Client-IP{}";
@@ -218,7 +220,7 @@ public class HttpBasicServer extends HttpServer {
                   request.header("Client-IP"));
     }
 
-    public void logUnAuthorizedRequest(final HttpRequest request) {
+    public void logUnAuthorizedRequest(final RestRequest request) {
         String addr = getAddress(request).getHostAddress();
         String t = "UNAUTHORIZED type:{}, address:{}, path:{}, request:{},"
           + "content:{}, credentials:{}";
