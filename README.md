@@ -1,4 +1,4 @@
-**IMPORTANT NOTICE**: This project is currently not supported. We accept pull requests, but we're not doing any feature development/bug fixing
+**IMPORTANT NOTICE**: This project is based on Asquera/elasticsearch-http-basic. It adds support to elasticsearch 2.4.4 and gradle compilation.
 
 
 [![Build Status](https://travis-ci.org/Asquera/elasticsearch-http-basic.svg?branch=master)](https://travis-ci.org/Asquera/elasticsearch-http-basic)
@@ -21,8 +21,9 @@ There is no way to configure this on a per index basis.
 
 |     Http Basic Plugin       | elasticsearch                |
 |-----------------------------|------------------------------|
-| v2.3.4 (master)			  | 2.3.4
-| v1.5.1		              | 1.5.1, 1.5.2, 1.6.0, 1.7.0   |
+| v2.4.4                      |                        2.4.4 |
+| v2.3.4 (master)             |                        2.3.4 |
+| v1.5.1                      |   1.5.1, 1.5.2, 1.6.0, 1.7.0 |
 | v1.5.0                      | 1.5.0                        |
 | v1.4.0                      | 1.4.0                        |
 | v1.3.0                      | 1.3.0                        |
