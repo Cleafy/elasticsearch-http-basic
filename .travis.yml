@@ -1,6 +1,13 @@
 language: java
 script:
-  - gradle plugin
-cache:
-  directories:
-  - $HOME/.m2
+- gradle plugin
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: nkOCpYO8dKKoOyvOGgJTxtOPoakoWgJ22SWcPOyRmEHl8KT3CJLRUJv1SP+2UpuQqbMSDeCwEvRp5FXdRFCtuFaMFpp+mhqVF/ZBahnnohtqlnlZaix8zcsg6JD1pEtrM6SE864paoWHjNiUecZjymBwgrdrmzgOCPN26u6tenPOou6VeQ1D0o6EwIhzSS96ucGHvYkWv3PJUQgqPsELujXTVUnyo5AqpMMspDp5rN9eQWBM7ynHqbnU9c8eD9GlcqPx5CHO+Sibv3YlNO59Cd24V2y/MnKua/sP3N7xeo9Itro/p0v4GSzvZlKHH9kNSak1khdxgJHO8vXm4EGJPJbV372cEPNbiZFWd6w1GBkgHURs3SKnnDcJigbDprb+bu+vDpvTQjBkHoY/Dyz42b5TiWjUtccx93EglTcS1dwtSN3rkKV64ghr2Epwon84F0Hi5ZFJpTroaAz0nAWrJnKzm7un2hhaZ4OlQjme808BRL6yk0hOrDOaGPDL9Gb4Dr86mu8MSKvu5ARq1Ta83EVVYtJxw4ilrNIKgVi109yi7kzEAygPGnVYrN6JRVnIwO2txMcD76Z40TbgkWfELG/+sS0cI6VfMEMz9rpMTyyvoeonQbiA10KxqzdkxFOh2M3oyGP5RgycKw8QoR/Pdd6lu75mzpWUxM0AGAasrVI=
+  file: build/distributions/elasticsearch-http-basic-plugin.zip
+  on:
+    repo: Cleafy/elasticsearch-http-basic
+    tags: true
+    branch: master

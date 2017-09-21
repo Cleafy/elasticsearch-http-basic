@@ -98,3 +98,4 @@ task unpackPlugin(type: Copy, dependsOn: [':buildPluginZip']) {
     into "plugins/${pluginName}"
 }
 
+plugin.setVersion('')
