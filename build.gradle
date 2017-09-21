@@ -84,9 +84,10 @@ task makePluginDescriptor(type: Copy) {
     ])
 }
 
-task buildPluginZip(type: Zip, dependsOn: [':jar', ':makePluginDescriptor']) {
+task plugin(type: Zip, dependsOn: [':jar', ':makePluginDescriptor']) {
     from configurations.releaseJars
     from 'build/tmp/plugin'
+    from 'build/libs'
     classifier = 'plugin'
 }
 
